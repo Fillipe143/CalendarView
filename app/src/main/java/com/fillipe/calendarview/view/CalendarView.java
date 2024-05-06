@@ -10,7 +10,6 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -286,6 +285,54 @@ public class CalendarView extends View {
         if (this.onDateSelectListener != null) {
             this.onDateSelectListener.onDateSelected(this.selectedDayCalendar);
         }
+    }
+
+    public void setTextSize(float textSize) {
+        this.textSize = textSize;
+        this.updateHeaderBitmap();
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
+    public void setOnDateSelectListener(OnDateSelectListener onDateSelectListener) {
+        this.onDateSelectListener = onDateSelectListener;
+    }
+
+    public void setTitleTextColor(int titleTextColor) {
+        this.titleTextColor = titleTextColor;
+        this.updateHeaderBitmap();
+        this.invalidate();
+    }
+
+    public void setDayTextColor(int dayTextColor) {
+        this.dayTextColor = dayTextColor;
+        this.updateHeaderBitmap();
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
+    public void setTodayTextColor(int todayTextColor) {
+        this.todayTextColor = todayTextColor;
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
+    public void setSelectedDayTextColor(int selectedDayTextColor) {
+        this.selectedDayTextColor = selectedDayTextColor;
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
+    public void setSelectedDayBackgroundColor(int selectedDayBackgroundColor) {
+        this.selectedDayBackgroundColor = selectedDayBackgroundColor;
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
+    public void setDisabledDayTextColor(int disabledDayTextColor) {
+        this.disabledDayTextColor = disabledDayTextColor;
+        this.updateBodyBitmap();
+        this.invalidate();
     }
 
     public interface OnDateSelectListener {
