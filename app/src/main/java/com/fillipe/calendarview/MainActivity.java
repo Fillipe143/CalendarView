@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             int year = calendar.get(Calendar.YEAR);
             
             String text = String.format(Locale.getDefault(), "O dia %d/%d/%d foi selecionado!", day, month, year);
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
         });
     }
 }
