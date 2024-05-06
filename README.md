@@ -9,3 +9,4 @@ A calendar view for Android
 - [ ] Disable all dates and enable some
 - [ ] Click and drag to change month
 - [ ] Ripple effect for date click
+- [ ] Add support for accessibility

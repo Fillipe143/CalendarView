@@ -290,7 +290,7 @@ public class CalendarView extends View {
     public void setTextSize(float textSize) {
         this.textSize = textSize;
         this.paint.setTextSize(Utils.spToPx(this.context, this.textSize));
-        
+
         this.updateHeaderBitmap();
         this.updateBodyBitmap();
         this.invalidate();
