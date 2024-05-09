@@ -132,6 +132,7 @@ public class CalendarView extends View {
     }
 
     private void updateHeaderBitmap() {
+        if (this.width <= 0 || this.headerHeight <= 0) return;
         this.headerBitmap = Bitmap.createBitmap(this.width, this.headerHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(this.headerBitmap);
 
@@ -164,6 +165,7 @@ public class CalendarView extends View {
     }
 
     private void updateBodyBitmap() {
+        if (this.width <= 0 || this.bodyHeight <= 0) return;
         this.bodyBitmap = Bitmap.createBitmap(this.width, this.bodyHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(this.bodyBitmap);
 
