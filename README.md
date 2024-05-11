@@ -6,7 +6,7 @@ A calendar view for Android
 ## Features
 - [x] Change the month by clicking
 - [x] Select a single date
-- [ ] Disable all dates and enable some
+- [x] Disable all dates and enable some
 - [ ] Click and drag to change month
 - [ ] Ripple effect for date click
 - [ ] Add support for accessibility

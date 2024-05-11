@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.TreeSet;
 
 public class CalendarView extends View {
 
@@ -31,6 +32,7 @@ public class CalendarView extends View {
 
     private float textSize = 14; // sp
     private boolean disableAllDates = false;
+    private TreeSet<Long> enabledDates = new TreeSet<>();
     private OnDateSelectListener onDateSelectListener = null;
 
     private Calendar todaysCalendar;
@@ -203,9 +205,12 @@ public class CalendarView extends View {
             this.paint.setColor(this.selectedDayTextColor);
         } else {
             // Set text color
-            if (Utils.isSameDay(dayCalendar, this.todaysCalendar)) this.paint.setColor(this.todayTextColor);
-            else if (this.disableAllDates) this.paint.setColor(this.disabledDayTextColor);
-            else this.paint.setColor(this.dayTextColor);
+            if (Utils.isSameDay(dayCalendar, this.todaysCalendar))
+                this.paint.setColor(this.todayTextColor);
+            else if (this.disableAllDates && !this.enabledDates.contains(Utils.getDayInMillis(dayCalendar)))
+                this.paint.setColor(this.disabledDayTextColor);
+            else
+                this.paint.setColor(this.dayTextColor);
         }
 
         canvas.drawText(String.valueOf(day), x, y, this.paint);
@@ -290,11 +295,16 @@ public class CalendarView extends View {
         }
     }
 
+    public void enableDate(Calendar calendar) {
+        this.enabledDates.add(Utils.getDayInMillis(calendar));
+    }
+
     public void setOnDateSelectListener(OnDateSelectListener onDateSelectListener) {
         this.onDateSelectListener = onDateSelectListener;
     }
 
     public void setDisableAllDates(boolean disableAllDates) {
+        if (disableAllDates) this.enabledDates = new TreeSet<>();
         this.disableAllDates = disableAllDates;
         this.updateBodyBitmap();
         this.invalidate();
@@ -452,6 +462,13 @@ public class CalendarView extends View {
         public static int getFirstDayOfMonth(Calendar calendar) {
             Calendar firstDayCalendar = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
             return firstDayCalendar.get(Calendar.DAY_OF_WEEK);
+        }
+
+        public static long getDayInMillis(Calendar calendar) {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            return new GregorianCalendar(year, month, day).getTimeInMillis();
         }
     }
 }

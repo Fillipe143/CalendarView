@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.fillipe.calendarview.view.CalendarView;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -25,5 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.setDisableAllDates(true);
+
+        // Enable next 7 days
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        for (int i = 0; i < 7; i++) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            calendarView.enableDate(calendar);
+        }
     }
 }
