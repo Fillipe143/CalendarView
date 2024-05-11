@@ -289,6 +289,10 @@ public class CalendarView extends View {
         }
     }
 
+    public void setOnDateSelectListener(OnDateSelectListener onDateSelectListener) {
+        this.onDateSelectListener = onDateSelectListener;
+    }
+
     public void setTextSize(float textSize) {
         this.textSize = textSize;
         this.paint.setTextSize(Utils.spToPx(this.context, this.textSize));
@@ -296,10 +300,6 @@ public class CalendarView extends View {
         this.updateHeaderBitmap();
         this.updateBodyBitmap();
         this.invalidate();
-    }
-
-    public void setOnDateSelectListener(OnDateSelectListener onDateSelectListener) {
-        this.onDateSelectListener = onDateSelectListener;
     }
 
     public void setTitleTextColor(int titleTextColor) {
@@ -337,6 +337,34 @@ public class CalendarView extends View {
         this.disabledDayTextColor = disabledDayTextColor;
         this.updateBodyBitmap();
         this.invalidate();
+    }
+
+    public int getTitleTextColor() {
+        return this.titleTextColor;
+    }
+
+    public int getDayTextColor() {
+        return this.dayTextColor;
+    }
+
+    public int getTodayTextColor() {
+        return this.todayTextColor;
+    }
+
+    public int getSelectedDayTextColor() {
+        return this.selectedDayTextColor;
+    }
+
+    public int getSelectedDayBackgroundColor() {
+        return this.selectedDayBackgroundColor;
+    }
+
+    public int getDisabledDayTextColor() {
+        return this.disabledDayTextColor;
+    }
+
+    public float getTextSize() {
+        return this.textSize;
     }
 
     public interface OnDateSelectListener {
