@@ -30,6 +30,7 @@ public class CalendarView extends View {
     private int disabledDayTextColor = 0xFFAAAAAA;
 
     private float textSize = 14; // sp
+    private boolean disableAllDates = false;
     private OnDateSelectListener onDateSelectListener = null;
 
     private Calendar todaysCalendar;
@@ -176,7 +177,6 @@ public class CalendarView extends View {
         int y = this.verticalMargin;
 
         // Render days
-        this.paint.setColor(this.dayTextColor);
         for (int day = 1; day < amountOfDaysInMonth; day++) {
             this.renderDay(canvas, x, y, day);
             currentDayOfWeek = (currentDayOfWeek + 1) % 8;
@@ -204,6 +204,7 @@ public class CalendarView extends View {
         } else {
             // Set text color
             if (Utils.isSameDay(dayCalendar, this.todaysCalendar)) this.paint.setColor(this.todayTextColor);
+            else if (this.disableAllDates) this.paint.setColor(this.disabledDayTextColor);
             else this.paint.setColor(this.dayTextColor);
         }
 
@@ -293,6 +294,12 @@ public class CalendarView extends View {
         this.onDateSelectListener = onDateSelectListener;
     }
 
+    public void setDisableAllDates(boolean disableAllDates) {
+        this.disableAllDates = disableAllDates;
+        this.updateBodyBitmap();
+        this.invalidate();
+    }
+
     public void setTextSize(float textSize) {
         this.textSize = textSize;
         this.paint.setTextSize(Utils.spToPx(this.context, this.textSize));
@@ -365,6 +372,10 @@ public class CalendarView extends View {
 
     public float getTextSize() {
         return this.textSize;
+    }
+
+    public boolean isDisableAllDates() {
+        return this.disableAllDates;
     }
 
     public interface OnDateSelectListener {

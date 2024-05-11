@@ -10,9 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.fillipe.calendarview.view.CalendarView;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,13 +24,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         CalendarView calendarView = findViewById(R.id.calendarView);
-        calendarView.setOnDateSelectListener(calendar -> {
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int month = calendar.get(Calendar.MONTH);
-            int year = calendar.get(Calendar.YEAR);
-            
-            String text = String.format(Locale.getDefault(), "O dia %d/%d/%d foi selecionado!", day, month, year);
-            //Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-        });
+        calendarView.setDisableAllDates(true);
     }
 }
